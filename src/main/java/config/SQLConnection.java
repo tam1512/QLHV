@@ -57,7 +57,7 @@ public final class SQLConnection {
             //System.exit(0);
             closeConnection();
         }
-        JOptionPane.showMessageDialog(null, "Đã kết nối được tới CSDL!", "Cảnh báo", JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, "Đã kết nối được tới CSDL!", "Cảnh báo", JOptionPane.INFORMATION_MESSAGE);
         
     }
 
