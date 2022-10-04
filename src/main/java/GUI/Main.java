@@ -11,7 +11,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import java.awt.Container;
+import java.awt.Frame;
+import javax.swing.JFrame;
 
 /**
  *
@@ -19,122 +20,115 @@ import java.awt.Container;
  */
 public class Main extends javax.swing.JFrame {
 
-    
-    /**
-     * Creates new form Main
-     */
+    int posX = 0, posY = 0;
     JPanel pnlCard, pnlTrangchu, pnlQLDiem, pnlQLGiangvien, pnlQLHocvien, pnlQLKhoahoc, pnlDangky;
     ArrayList<JPanel> listMenuLeft;
     CardLayout cards = new CardLayout();
-    
+
     public Main() {
         initComponents();
         control();
         addEvents();
     }
-    
-    private void control(){
-        
+
+    private void control() {
+
         pnlCard = new JPanel(cards);
         pnlTrangchu = new JPanel();
         pnlTrangchu.setBackground(Color.MAGENTA);
         pnlQLDiem = new JPanel();
-        pnlQLGiangvien = new JPanel(); 
+        pnlQLGiangvien = new JPanel();
         pnlQLHocvien = new JPanel();
         pnlQLKhoahoc = new JPanel();
         pnlDangky = new JPanel();
-        
+
         QLyHocVien hocvien = new QLyHocVien();
         hocvien.setVisible(true);
         pnlQLHocvien.add(hocvien);
-        
-        
+
         QLyGiangVien giangvien = new QLyGiangVien();
         giangvien.setVisible(true);
         pnlQLGiangvien.add(giangvien);
-        
-        
+
         QLyDiem diem = new QLyDiem();
         diem.setVisible(true);
         pnlQLDiem.add(diem);
-        
-        
+
         QLyKhoaHoc khoahoc = new QLyKhoaHoc();
         khoahoc.setVisible(true);
         pnlQLKhoahoc.add(khoahoc);
-        
+
         DangKy dangky = new DangKy();
         dangky.setVisible(true);
         pnlDangky.add(dangky);
-        
+
 //        pnlCard.add(pnlTrangchu,"1");
-        pnlCard.add(pnlQLHocvien,"1");
-        pnlCard.add(pnlQLDiem,"2");
-        pnlCard.add(pnlQLGiangvien,"3");
-        pnlCard.add(pnlQLKhoahoc,"4");
-        pnlCard.add(pnlDangky,"5");
-        
+        pnlCard.add(pnlQLHocvien, "1");
+        pnlCard.add(pnlQLDiem, "2");
+        pnlCard.add(pnlQLGiangvien, "3");
+        pnlCard.add(pnlQLKhoahoc, "4");
+        pnlCard.add(pnlDangky, "5");
+
         cards.show(pnlCard, "1");
         pnlView.add(pnlCard);
-        
+
     }
-    
+
     private void addEvents() {
-        
+
         listMenuLeft = new ArrayList<>();
-        
+
         listMenuLeft.add(pnlMenu_HV);
         listMenuLeft.add(pnlMenu_Diem);
         listMenuLeft.add(pnlMenu_GV);
         listMenuLeft.add(pnlMenu_KH);
         listMenuLeft.add(pnlMenu_DK);
 //        listMenuLeft.add(pnlDangky);
-        
-        for( JPanel pnl : listMenuLeft)
-            {
-                pnl.addMouseListener(new MouseListener() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        
-                        String cardname = "";
-                        if(pnl == pnlMenu_HV){
-                            cardname = "1";
-                        }else if(pnl == pnlMenu_Diem){
-                            cardname = "2";
-                        }else if(pnl == pnlMenu_GV){
-                            cardname = "3";
-                        }else if(pnl == pnlMenu_KH){
-                            cardname = "4";
-                        }else if(pnl == pnlMenu_DK){
-                            cardname = "5";
-                        }
-                        
-                        cards.show(pnlCard, cardname);
+
+        for (JPanel pnl : listMenuLeft) {
+            pnl.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                    String cardname = "";
+                    if (pnl == pnlMenu_HV) {
+                        cardname = "1";
+                    } else if (pnl == pnlMenu_Diem) {
+                        cardname = "2";
+                    } else if (pnl == pnlMenu_GV) {
+                        cardname = "3";
+                    } else if (pnl == pnlMenu_KH) {
+                        cardname = "4";
+                    } else if (pnl == pnlMenu_DK) {
+                        cardname = "5";
                     }
 
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-                        
-                    }
+                    cards.show(pnlCard, cardname);
+                }
 
-                    @Override
-                    public void mouseReleased(MouseEvent e) {
-                       
-                    }
+                @Override
+                public void mousePressed(MouseEvent e) {
 
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        
-                    }
+                }
 
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        
-                    }
-                });
-            }
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,7 +139,9 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        nevPane = new javax.swing.JPanel();
+        lblClose = new javax.swing.JLabel();
+        lblMinimize = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pnlMenu_HV = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -160,84 +156,155 @@ public class Main extends javax.swing.JFrame {
         pnlView = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(930, 590));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel8.setBackground(new java.awt.Color(153, 153, 255));
+        nevPane.setBackground(new java.awt.Color(102, 102, 255));
+        nevPane.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        nevPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                nevPaneMouseDragged(evt);
+            }
+        });
+        nevPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                nevPaneMousePressed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 960, Short.MAX_VALUE)
+        lblClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblClose.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\QLySV\\src\\main\\java\\image\\outline_cancel_black_24dp.png")); // NOI18N
+        lblClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCloseMouseClicked(evt);
+            }
+        });
+
+        lblMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMinimize.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\QLySV\\src\\main\\java\\image\\outline_do_not_disturb_on_black_24dp.png")); // NOI18N
+        lblMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMinimizeMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout nevPaneLayout = new javax.swing.GroupLayout(nevPane);
+        nevPane.setLayout(nevPaneLayout);
+        nevPaneLayout.setHorizontalGroup(
+            nevPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nevPaneLayout.createSequentialGroup()
+                .addContainerGap(840, Short.MAX_VALUE)
+                .addComponent(lblMinimize)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblClose)
+                .addGap(54, 54, 54))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+        nevPaneLayout.setVerticalGroup(
+            nevPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nevPaneLayout.createSequentialGroup()
+                .addGroup(nevPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblClose)
+                    .addComponent(lblMinimize))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 20));
+        jPanel2.add(nevPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 30));
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlMenu_HV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlMenu_HV.setToolTipText("");
         pnlMenu_HV.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Quản lý học viên");
-        pnlMenu_HV.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 28));
+        pnlMenu_HV.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 30));
 
-        jPanel1.add(pnlMenu_HV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 150, 50));
+        jPanel1.add(pnlMenu_HV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 150, 50));
 
         pnlMenu_DK.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlMenu_DK.setToolTipText("");
         pnlMenu_DK.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Đăng ký");
-        pnlMenu_DK.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 56, 29));
+        pnlMenu_DK.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 29));
 
-        jPanel1.add(pnlMenu_DK, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 150, 50));
+        jPanel1.add(pnlMenu_DK, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 150, 50));
 
         pnlMenu_KH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlMenu_KH.setToolTipText("");
         pnlMenu_KH.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Quản lý khóa học");
-        pnlMenu_KH.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 100, 28));
+        pnlMenu_KH.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 28));
 
-        jPanel1.add(pnlMenu_KH, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 150, 50));
+        jPanel1.add(pnlMenu_KH, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 150, 50));
 
         pnlMenu_Diem.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlMenu_Diem.setToolTipText("");
         pnlMenu_Diem.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Quản lý điểm");
-        pnlMenu_Diem.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 80, 28));
+        pnlMenu_Diem.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 28));
 
-        jPanel1.add(pnlMenu_Diem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 150, 50));
+        jPanel1.add(pnlMenu_Diem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 150, 50));
 
         pnlMenu_GV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlMenu_GV.setToolTipText("");
         pnlMenu_GV.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Quản lý giảng viên");
-        pnlMenu_GV.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 28));
+        pnlMenu_GV.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 30));
 
-        jPanel1.add(pnlMenu_GV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 150, 50));
+        jPanel1.add(pnlMenu_GV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 150, 50));
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 640));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 590));
 
+        pnlView.setBackground(new java.awt.Color(204, 204, 255));
         pnlView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255)));
         pnlView.setPreferredSize(new java.awt.Dimension(810, 560));
         pnlView.setLayout(new java.awt.CardLayout());
-        jPanel2.add(pnlView, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 730, 620));
+        jPanel2.add(pnlView, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 730, 590));
+        pnlView.getAccessibleContext().setAccessibleName("");
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 640));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nevPaneMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nevPaneMouseDragged
+        // TODO add your handling code here:
+        setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
+    }//GEN-LAST:event_nevPaneMouseDragged
+
+    private void nevPaneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nevPaneMousePressed
+        // TODO add your handling code here:
+        posX = evt.getX();
+        posY = evt.getY();
+    }//GEN-LAST:event_nevPaneMousePressed
+
+    private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_lblCloseMouseClicked
+
+    private void lblMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizeMouseClicked
+        // TODO add your handling code here:
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_lblMinimizeMouseClicked
+
 
     /**
      * @param args the command line arguments
@@ -250,24 +317,21 @@ public class Main extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
+        //</editor-fold>
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 Main a = new Main();
                 a.setVisible(true);
@@ -284,7 +348,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JLabel lblClose;
+    private javax.swing.JLabel lblMinimize;
+    private javax.swing.JPanel nevPane;
     private javax.swing.JPanel pnlMenu_DK;
     private javax.swing.JPanel pnlMenu_Diem;
     private javax.swing.JPanel pnlMenu_GV;

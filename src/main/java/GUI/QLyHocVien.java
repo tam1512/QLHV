@@ -4,18 +4,75 @@
  */
 package GUI;
 
+import BUS.StudentBUS;
+import DTO.Student_DTO;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
  */
 public class QLyHocVien extends javax.swing.JPanel {
 
+    private Student_DTO stuDTO;
+    private StudentBUS stuBUS = new StudentBUS() ;
+    private DefaultTableModel dtmStu;
     /**
      * Creates new form Hv
      */
     public QLyHocVien() {
         initComponents();
+        customStu();
+        
     }
+    
+    public void loadStuList(){
+        
+        dtmStu.setRowCount(0);
+        stuBUS.getStuList();
+        ArrayList<Student_DTO> stuList = stuBUS.getStuList();
+        
+        if(stuList != null){
+            for ( Student_DTO hv : stuList  ){
+                Vector vec = new Vector();
+                vec.add(hv.getStuID());
+                vec.add(hv.getLastName());
+                vec.add(hv.getStName());
+                vec.add(hv.getDob());
+                vec.add(hv.getGender());
+                vec.add(hv.getRegDate());
+                dtmStu.addRow(vec);
+            }
+        }
+        
+    }
+    
+    public void customStu(){
+        dtmStu = new DefaultTableModel();
+        dtmStu.addColumn("Student ID");
+        dtmStu.addColumn("LastName");
+        dtmStu.addColumn("Name");
+        dtmStu.addColumn("DOB");
+        dtmStu.addColumn("Gender");
+        dtmStu.addColumn("Register Date");
+        
+        tblStudent.setModel(dtmStu);
+        tblStudent.getColumnModel().getColumn(0).setPreferredWidth(15);
+        tblStudent.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tblStudent.getColumnModel().getColumn(2).setPreferredWidth(35);
+        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(111);
+        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(111);
+        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(111);
+        
+        loadStuList();
+        
+        
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,32 +83,63 @@ public class QLyHocVien extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        btnSearch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
+        btnRepair = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblStudent = new javax.swing.JTable();
+        txtLookup = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
-        jPanel2.setPreferredSize(new java.awt.Dimension(797, 531));
+        setBackground(new java.awt.Color(204, 204, 255));
+        setMinimumSize(new java.awt.Dimension(810, 560));
+        setPreferredSize(new java.awt.Dimension(730, 590));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnSearch.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\QLySV\\src\\main\\java\\image\\outline_search_black_24dp.png")); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 50, 40));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel2.setText("QUẢN LÝ HỌC VIÊN");
-        jLabel2.setToolTipText("");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 544, 71));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Look for :");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 70, 40));
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnAdd.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, 60, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnRepair.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnRepair.setText("Update");
+        btnRepair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRepairActionPerformed(evt);
+            }
+        });
+        add(btnRepair, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 90, 40));
+
+        btnDelete.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 80, 40));
+
+        tblStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,79 +150,59 @@ public class QLyHocVien extends javax.swing.JPanel {
                 "Mã học viên", "Tên", "Họ", "Ngày đăng ký"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblStudent.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jScrollPane1.setViewportView(tblStudent);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 700, 310));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 640, 320));
 
-        jLabel3.setText("Tìm kiếm theo:");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, 40));
+        txtLookup.setText("Enter...");
+        add(txtLookup, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 240, 40));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("LEARNER MANAGEMENT");
+        jLabel2.setToolTipText("");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 544, 60));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Tên", "Họ" }));
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 70, 40));
-
-        jTextField1.setText("nhập nội dung");
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 240, 40));
-
-        jButton1.setText("Tìm");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 50, 40));
-
-        jButton2.setText("Xóa");
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 60, 40));
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        jButton3.setText("+");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 40, 40));
-
-        jButton4.setText("Sửa");
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 60, 40));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 50, 40));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO open NewStudent JDialog
+        this.getClass().getResource("outline_search_black_24dp.png");       
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+         try {
+            JdlCreateStudent a = new JdlCreateStudent(null, true);
+            a.setModal(true);
+            a.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnRepairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRepairActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnRepair;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblStudent;
+    private javax.swing.JTextField txtLookup;
     // End of variables declaration//GEN-END:variables
 }

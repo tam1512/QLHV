@@ -100,27 +100,27 @@ public final class SQLConnection {
         }
     }
 
-//    public ResultSet sqlExcute(String sql) throws ClassNotFoundException {
-//        docFileText();
-//
-//        url = "jdbc:mysql://" + host + ":3306/" + database + "?useUnicode=true&characterEncoding=UTF8";
-//
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            conn = DriverManager.getConnection(url, username, password);
-//            System.out.println("Success");
-//            st = conn.createStatement();
-//            rs = st.executeQuery(sql);
-//            return rs;
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Database connection failed!", "Error", JOptionPane.INFORMATION_MESSAGE);
-//            //System.exit(0);
-//        }
-//        closeConnection();
-//        return null;
-//
-//    }
+    public ResultSet sqlExcute(String sql) throws ClassNotFoundException {
+        docFileText();
+
+        url = "jdbc:mysql://" + host + ":3306/" + database + "?useUnicode=true&characterEncoding=UTF8";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Success");
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            return rs;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Database connection failed!", "Error", JOptionPane.INFORMATION_MESSAGE);
+            //System.exit(0);
+        }
+        closeConnection();
+        return null;
+
+    }
 
 //    public boolean sqlUpdate(String sql) {
 //        docFileText();
