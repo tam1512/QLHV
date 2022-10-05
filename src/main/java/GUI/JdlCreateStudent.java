@@ -40,10 +40,10 @@ public class JdlCreateStudent extends javax.swing.JDialog {
         jclDOB = new com.toedter.calendar.JDateChooser();
         rbtnFemale = new javax.swing.JRadioButton();
         rbtnMale = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        btnCreateNewStu = new javax.swing.JButton();
         lblNameForm = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnClearWords = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -78,13 +78,13 @@ public class JdlCreateStudent extends javax.swing.JDialog {
         rbtnMale.setText("Male");
         jPanel1.add(rbtnMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, -1, 30));
 
-        jButton1.setText("Create");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCreateNewStu.setText("Create");
+        btnCreateNewStu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCreateNewStuActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 80, 40));
+        jPanel1.add(btnCreateNewStu, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 80, 40));
 
         lblNameForm.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -111,13 +111,13 @@ public class JdlCreateStudent extends javax.swing.JDialog {
 
         jPanel1.add(lblNameForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 450, -1));
 
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnClearWords.setText("Clear");
+        btnClearWords.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnClearWordsActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, 40));
+        jPanel1.add(btnClearWords, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, 40));
 
         btnCancel.setText("Cancel");
         btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,11 +141,11 @@ public class JdlCreateStudent extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCreateNewStuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewStuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCreateNewStuActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnClearWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearWordsActionPerformed
         // TODO làm sạc các trường thông tin
         txtLastName.setText(null);
         txtStName.setText(null);
@@ -154,11 +154,12 @@ public class JdlCreateStudent extends javax.swing.JDialog {
         jclRegDate.setDateFormatString(null);
         jclRegDate.setDate(null);
         btnGroupGender.clearSelection();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnClearWordsActionPerformed
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
         // TODO add your handling code here:
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnCancelMouseClicked
 
     /**
@@ -206,9 +207,9 @@ public class JdlCreateStudent extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnClearWords;
+    private javax.swing.JButton btnCreateNewStu;
     private javax.swing.ButtonGroup btnGroupGender;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

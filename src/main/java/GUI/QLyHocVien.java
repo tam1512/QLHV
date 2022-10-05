@@ -60,12 +60,13 @@ public class QLyHocVien extends javax.swing.JPanel {
         dtmStu.addColumn("Register Date");
         
         tblStudent.setModel(dtmStu);
-        tblStudent.getColumnModel().getColumn(0).setPreferredWidth(15);
+        tblStudent.getColumnModel().getColumn(0).setPreferredWidth(80);
+        tblStudent.getColumnModel().getColumn(0).setModelIndex((int) CENTER_ALIGNMENT);
         tblStudent.getColumnModel().getColumn(1).setPreferredWidth(120);
-        tblStudent.getColumnModel().getColumn(2).setPreferredWidth(35);
-        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(111);
-        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(111);
-        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(111);
+        tblStudent.getColumnModel().getColumn(2).setPreferredWidth(55);
+        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(70);
+        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(50);
+        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(110);
         
         loadStuList();
         

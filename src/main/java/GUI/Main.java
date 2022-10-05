@@ -206,7 +206,7 @@ public class Main extends javax.swing.JFrame {
         nevPaneLayout.setVerticalGroup(
             nevPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nevPaneLayout.createSequentialGroup()
-                .addGroup(nevPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(nevPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblClose)
                     .addComponent(lblMinimize))
                 .addGap(0, 0, Short.MAX_VALUE))

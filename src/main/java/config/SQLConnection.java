@@ -53,8 +53,8 @@ public final class SQLConnection {
 //            System.out.println("Success");
 //            System.out.println(conn.getCatalog());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Không kết nối được tới CSDL!", "Cảnh báo", JOptionPane.INFORMATION_MESSAGE);
-            //System.exit(0);
+            JOptionPane.showMessageDialog(null, "Fail to connect database!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
             closeConnection();
         }
 //        JOptionPane.showMessageDialog(null, "Đã kết nối được tới CSDL!", "Cảnh báo", JOptionPane.INFORMATION_MESSAGE);
