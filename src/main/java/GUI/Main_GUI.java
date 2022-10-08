@@ -24,14 +24,14 @@ import javax.swing.JFrame;
  *
  * @author Sam
  */
-public class Main extends javax.swing.JFrame {
+public class Main_GUI extends javax.swing.JFrame {
 
     int posX = 0, posY = 0;
     JPanel pnlCard, pnlTrangchu, pnlQLDiem, pnlQLGiangvien, pnlQLHocvien, pnlQLKhoahoc, pnlDangky;
     ArrayList<JPanel> listMenuLeft;
     CardLayout cards = new CardLayout();
 
-    public Main() throws InterruptedException {
+    public Main_GUI() throws InterruptedException {
         initComponents();
         control();
         addEvents();
@@ -211,7 +211,6 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(930, 590));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
@@ -371,8 +370,9 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         //</editor-fold>
@@ -381,13 +381,13 @@ public class Main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Main a;
+                Main_GUI a;
                 try {
-                    a = new Main();
+                    a = new Main_GUI();
                     a.setVisible(true);
                     a.setLocationRelativeTo(null);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Main_GUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
             }
