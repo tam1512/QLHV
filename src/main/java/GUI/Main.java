@@ -12,6 +12,12 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -25,17 +31,18 @@ public class Main extends javax.swing.JFrame {
     ArrayList<JPanel> listMenuLeft;
     CardLayout cards = new CardLayout();
 
-    public Main() {
+    public Main() throws InterruptedException {
         initComponents();
         control();
         addEvents();
+        ClockTime();
     }
 
     private void control() {
 
         pnlCard = new JPanel(cards);
-        pnlTrangchu = new JPanel();
-        pnlTrangchu.setBackground(Color.MAGENTA);
+//        pnlTrangchu = new JPanel();
+//        pnlTrangchu.setBackground(Color.MAGENTA);
         pnlQLDiem = new JPanel();
         pnlQLGiangvien = new JPanel();
         pnlQLHocvien = new JPanel();
@@ -129,6 +136,50 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
+    private void ClockTime() throws InterruptedException {
+
+        Thread clock = new Thread(){
+            public void run(){
+                try {
+                    while (true) {
+                        Calendar cal = new GregorianCalendar();
+                        int second = cal.get(Calendar.SECOND);
+                        int minute = cal.get(Calendar.MINUTE);
+                        int hour = cal.get(Calendar.HOUR_OF_DAY);
+                        String thu = null;
+                        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+                        if (dayOfWeek == 1) {
+                            thu = "Sunday";
+                        } else if (dayOfWeek == 2) {
+                            thu = "Monday";
+                        }else if (dayOfWeek == 3){
+                            thu = "Tuesday";
+                        } else if (dayOfWeek == 4){
+                            thu = "Wednesday";
+                        } else if (dayOfWeek == 5){
+                            thu = "Thursday";
+                        } else if (dayOfWeek == 6){
+                            thu = "Friday";
+                        } else if (dayOfWeek == 7){
+                            thu = "Saturday";
+                        }
+                        int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+                        int month = cal.get(Calendar.MONTH);
+                        int year = cal.get(Calendar.YEAR);
+
+                        lblCLock.setText(hour + ":" + minute + ":" + second);
+                        lblDate.setText(thu + ", " + dayOfMonth + "/" + (month + 1) + "/" + year);
+                        sleep(1000);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        clock.start();
+    }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -153,6 +204,8 @@ public class Main extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         pnlMenu_GV = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        lblCLock = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
         pnlView = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,10 +214,12 @@ public class Main extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(930, 590));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nevPane.setBackground(new java.awt.Color(102, 102, 255));
-        nevPane.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        nevPane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         nevPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 nevPaneMouseDragged(evt);
@@ -175,6 +230,7 @@ public class Main extends javax.swing.JFrame {
                 nevPaneMousePressed(evt);
             }
         });
+        nevPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblClose.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\QLySV\\src\\main\\java\\image\\outline_cancel_black_24dp.png")); // NOI18N
@@ -183,6 +239,7 @@ public class Main extends javax.swing.JFrame {
                 lblCloseMouseClicked(evt);
             }
         });
+        nevPane.add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 2, -1, -1));
 
         lblMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMinimize.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\QLySV\\src\\main\\java\\image\\outline_do_not_disturb_on_black_24dp.png")); // NOI18N
@@ -191,31 +248,12 @@ public class Main extends javax.swing.JFrame {
                 lblMinimizeMouseClicked(evt);
             }
         });
+        nevPane.add(lblMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(844, 2, -1, -1));
 
-        javax.swing.GroupLayout nevPaneLayout = new javax.swing.GroupLayout(nevPane);
-        nevPane.setLayout(nevPaneLayout);
-        nevPaneLayout.setHorizontalGroup(
-            nevPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nevPaneLayout.createSequentialGroup()
-                .addContainerGap(840, Short.MAX_VALUE)
-                .addComponent(lblMinimize)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblClose)
-                .addGap(54, 54, 54))
-        );
-        nevPaneLayout.setVerticalGroup(
-            nevPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(nevPaneLayout.createSequentialGroup()
-                .addGroup(nevPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblClose)
-                    .addComponent(lblMinimize))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(nevPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 30));
+        jPanel2.add(nevPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 30));
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlMenu_HV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -268,16 +306,26 @@ public class Main extends javax.swing.JFrame {
 
         jPanel1.add(pnlMenu_GV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 150, 50));
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 590));
+        lblCLock.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCLock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCLock.setText("Time");
+        jPanel1.add(lblCLock, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 130, 30));
+
+        lblDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDate.setText("Date");
+        jPanel1.add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 100, 200, 30));
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 230, 560));
 
         pnlView.setBackground(new java.awt.Color(204, 204, 255));
-        pnlView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255)));
+        pnlView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlView.setPreferredSize(new java.awt.Dimension(810, 560));
         pnlView.setLayout(new java.awt.CardLayout());
-        jPanel2.add(pnlView, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 730, 590));
+        jPanel2.add(pnlView, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 700, 560));
         pnlView.getAccessibleContext().setAccessibleName("");
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 640));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -298,13 +346,13 @@ public class Main extends javax.swing.JFrame {
         this.setVisible(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_lblCloseMouseClicked
 
     private void lblMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizeMouseClicked
         // TODO add your handling code here:
         this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_lblMinimizeMouseClicked
-
 
     /**
      * @param args the command line arguments
@@ -333,9 +381,15 @@ public class Main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Main a = new Main();
-                a.setVisible(true);
-                a.setLocationRelativeTo(null);
+                Main a;
+                try {
+                    a = new Main();
+                    a.setVisible(true);
+                    a.setLocationRelativeTo(null);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         });
     }
@@ -348,7 +402,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCLock;
     private javax.swing.JLabel lblClose;
+    private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblMinimize;
     private javax.swing.JPanel nevPane;
     private javax.swing.JPanel pnlMenu_DK;

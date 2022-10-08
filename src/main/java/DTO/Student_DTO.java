@@ -16,13 +16,13 @@ public class Student_DTO {
     private String lastName;
     private String stName;
     private String gender;
-    private Date dob;
-    private Date regDate;
+    private String dob;
+    private String regDate;
 
     public Student_DTO() {
     }
 
-    public Student_DTO(String stuID, String lastName, String stName, String gender, Date dob, Date regDate) {
+    public Student_DTO(String stuID, String lastName, String stName, String gender, String dob, String regDate) {
         this.stuID = stuID;
         this.lastName = lastName;
         this.stName = stName;
@@ -63,19 +63,19 @@ public class Student_DTO {
         this.gender = gender;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
-    public Date getRegDate() {
+    public String getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(Date regDate) {
+    public void setRegDate(String regDate) {
         this.regDate = regDate;
     }
 

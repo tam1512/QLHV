@@ -9,7 +9,12 @@ import DTO.Student_DTO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import GUI.JdlCreateStudent;
+
 
 /**
  *
@@ -19,7 +24,7 @@ public class QLyHocVien extends javax.swing.JPanel {
 
     private Student_DTO stuDTO;
     private StudentBUS stuBUS = new StudentBUS() ;
-    private DefaultTableModel dtmStu;
+    private DefaultTableModel dtmStu = null;
     /**
      * Creates new form Hv
      */
@@ -27,10 +32,13 @@ public class QLyHocVien extends javax.swing.JPanel {
         initComponents();
         customStu();
         
+        
     }
     
     public void loadStuList(){
         
+        
+        tblStudent.setModel(dtmStu);
         dtmStu.setRowCount(0);
         stuBUS.getStuList();
         ArrayList<Student_DTO> stuList = stuBUS.getStuList();
@@ -46,8 +54,9 @@ public class QLyHocVien extends javax.swing.JPanel {
                 vec.add(hv.getRegDate());
                 dtmStu.addRow(vec);
             }
-        }
-        
+           
+//            dtmStu.fireTableDataChanged();
+        }    
     }
     
     public void customStu(){
@@ -87,17 +96,18 @@ public class QLyHocVien extends javax.swing.JPanel {
         btnSearch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
-        btnRepair = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStudent = new javax.swing.JTable();
         txtLookup = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 255));
-        setMinimumSize(new java.awt.Dimension(810, 560));
-        setPreferredSize(new java.awt.Dimension(730, 590));
+        setMinimumSize(new java.awt.Dimension(720, 550));
+        setPreferredSize(new java.awt.Dimension(720, 550));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSearch.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -114,22 +124,22 @@ public class QLyHocVien extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 70, 40));
 
         btnAdd.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnAdd.setText("Add");
+        btnAdd.setText("Create");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, 60, 40));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, -1, 40));
 
-        btnRepair.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnRepair.setText("Update");
-        btnRepair.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRepairActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
-        add(btnRepair, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 90, 40));
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 500, 90, 40));
 
         btnDelete.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnDelete.setText("Delete");
@@ -138,7 +148,7 @@ public class QLyHocVien extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 80, 40));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 500, 80, 40));
 
         tblStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,6 +177,14 @@ public class QLyHocVien extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Tên", "Họ" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 50, 40));
+
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\QLySV\\src\\main\\java\\image\\outline_refresh_black_24dp.png")); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 50, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -185,25 +203,46 @@ public class QLyHocVien extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void btnRepairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepairActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRepairActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int row = tblStudent.getSelectedRow();
+        if (row > -1) {
+            boolean flag = stuBUS.deleteStudent(dtmStu.getValueAt(row, 0).toString());
+            customStu();
+           
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng muốn xóa!");
+        }
+        
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        
+        try{
+            customStu();
+        }catch(Exception e){
+            e.getMessage();
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnRepair;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblStudent;
+    public javax.swing.JTable tblStudent;
     private javax.swing.JTextField txtLookup;
     // End of variables declaration//GEN-END:variables
 }

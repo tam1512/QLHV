@@ -41,8 +41,8 @@ public class StudentBUS {
         
     }
     
-    public boolean addStudent(String stuID, String lastName, String stName, String gender, Date dob, Date regDate){
-         
+    public boolean addStudent( String lastName, String stName, String dob, String gender, String regDate){
+        boolean flag = false;
         try {
             if(lastName.trim().equals("")){
                 JOptionPane.showMessageDialog(null, "Chưa nhập họ học viên", "CẢNH BÁO", JOptionPane.ERROR_MESSAGE);
@@ -55,25 +55,36 @@ public class StudentBUS {
             if(gender.trim().equals("") | dob.equals("") | regDate.equals("")){
                 JOptionPane.showMessageDialog(null, "Vẫn còn các trường chưa nhập thông tin", "CẢNH BÁO", JOptionPane.ERROR_MESSAGE);
             }
+            if(!lastName.trim().equals("") && !stName.trim().equals("") && !gender.trim().equals("") && !dob.equals("") && !regDate.equals("") ){
+                
             
-            Student_DTO hv = new Student_DTO();
-            hv.setStuID(createAutoId());
-            hv.setLastName(lastName);
-            hv.setStName(stName);
-            hv.setDob(dob);
-            hv.setGender(gender);
-            hv.setRegDate(regDate);
-            
-            boolean flag = stuDAO.addStu(hv);
-            if(flag != true)
-                JOptionPane.showMessageDialog(null, "Thêm mới không thành công!", "CẢNH BÁO", JOptionPane.ERROR_MESSAGE);
-            JOptionPane.showMessageDialog(null, "Thêm mới thành công!", "CẢNH BÁO", JOptionPane.ERROR_MESSAGE);
-            
-            } catch (SQLException ex) {
+                Student_DTO hv = new Student_DTO();
+                hv.setStuID(createAutoId());
+                hv.setLastName(lastName);
+                hv.setStName(stName);
+                hv.setDob(dob);
+                hv.setGender(gender);
+                hv.setRegDate(regDate);
+
+                flag = stuDAO.addStu(hv);
+                if(flag != true)
+                {
+                    JOptionPane.showMessageDialog(null, "Fail!", "WARNING", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Success!", "NOTICE", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(StudentBUS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
         
+        return flag;
+    }
+    
+    public boolean deleteStudent(String stuID){
+        boolean flag = stuDAO.deleteStu(stuID);
+        return flag;
     }
     
     public String createAutoId() throws SQLException {
@@ -81,7 +92,7 @@ public class StudentBUS {
         if (data == null || data.isEmpty()) {
             return null;
         }
-        int intData = Integer.parseInt(data.replace("SV", "")) + 1;
-        return ("SV" + intData);
+        int intData = Integer.parseInt(data.replace("SD", "")) + 1;
+        return ("SD" + intData);
     }
 }

@@ -41,9 +41,9 @@ public class StudentDAO {
                 hv.setStuID(rs.getString(1));
                 hv.setLastName(rs.getString(2));
                 hv.setStName(rs.getString(3));
-                hv.setDob(rs.getDate(4));
+                hv.setDob(rs.getString(4));
                 hv.setGender(rs.getString(5));
-                hv.setRegDate(rs.getDate(6));  
+                hv.setRegDate(rs.getString(6));  
                 dshv.add(hv);
             }
             return dshv;
@@ -62,12 +62,13 @@ public class StudentDAO {
             prep.setString(1, stu.getStuID());
             prep.setString(2, stu.getLastName());
             prep.setString(3, stu.getStName());
-            prep.setDate(4, stu.getDob());
+            prep.setString(4, stu.getDob());
             prep.setString(5, stu.getGender());
-            prep.setDate(6, stu.getRegDate());
+            prep.setString(6, stu.getRegDate());
             result = prep.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         return result;
     }
@@ -79,9 +80,9 @@ public class StudentDAO {
             PreparedStatement prep = conn.prepareStatement(sql);
             prep.setString(1, stu.getLastName());
             prep.setString(2, stu.getStName());
-            prep.setDate(3, stu.getDob());
+            prep.setString(3, stu.getDob());
             prep.setString(4, stu.getGender());
-            prep.setDate(5, stu.getRegDate());
+            prep.setString(5, stu.getRegDate());
             prep.setString(6, stu.getStuID());
             result = prep.executeUpdate() > 0;
         } catch (SQLException ex) {
@@ -104,7 +105,7 @@ public class StudentDAO {
     }
     
     public String lastIdOrder() throws SQLException {
-        String sql = "SELECT * FROM tbl_nhacungcap ORDER BY maNCC DESC LIMIT 1";
+        String sql = "SELECT * FROM student ORDER BY StudentID DESC LIMIT 1";
         rs = null;
         try {
             st = conn.createStatement();

@@ -4,6 +4,18 @@
  */
 package GUI;
 
+import BUS.StudentBUS;
+import DTO.Student_DTO;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import GUI.QLyHocVien;
+import java.util.ArrayList;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -13,9 +25,54 @@ public class JdlCreateStudent extends javax.swing.JDialog {
     /**
      * Creates new form JdlNewStudent
      */
-    public JdlCreateStudent(java.awt.Frame parent, boolean modal) {
+    private StudentBUS stuBUS = new StudentBUS();
+    private Student_DTO stuDTO = null;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    QLyHocVien a = new QLyHocVien();
+    DefaultTableModel dtmStu;
+    
+    
+    public JdlCreateStudent(java.awt.Frame parent, boolean modal) throws ClassNotFoundException {
         super(parent, modal);
         initComponents();
+//        ListStu();
+        taiDanhsach();
+        
+    }
+    
+//    public void ListStu(){
+//        a.loadStuList();
+//        a.customStu();
+//    }
+    public void taiDanhsach() throws ClassNotFoundException {
+
+        dtmStu = new DefaultTableModel();
+        dtmStu.addColumn("Student ID");
+        dtmStu.addColumn("LastName");
+        dtmStu.addColumn("Name");
+        dtmStu.addColumn("DOB");
+        dtmStu.addColumn("Gender");
+        dtmStu.addColumn("Register Date");
+        
+        a.tblStudent.setModel(dtmStu);
+        
+        dtmStu.setRowCount(0);
+        stuBUS.getStuList();
+
+        ArrayList<Student_DTO> dssp = stuBUS.getStuList();
+        if (dssp != null) {
+            for (Student_DTO hv : dssp) {
+                Vector vt = new Vector();
+                Vector vec = new Vector();
+                vec.add(hv.getStuID());
+                vec.add(hv.getLastName());
+                vec.add(hv.getStName());
+                vec.add(hv.getDob());
+                vec.add(hv.getGender());
+                vec.add(hv.getRegDate());
+                dtmStu.addRow(vec);
+            }
+        }
     }
 
     /**
@@ -142,7 +199,31 @@ public class JdlCreateStudent extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateNewStuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewStuActionPerformed
-        // TODO add your handling code here:
+        
+        try {
+            String gt = null;
+            if(rbtnFemale.isSelected()){
+                gt = "Femal";
+            } else if (rbtnMale.isSelected()){
+                gt = "Male";
+            }
+            
+            boolean flag = stuBUS.addStudent(txtLastName.getText(), txtStName.getText(),sdf.format(jclDOB.getDate()), gt, sdf.format(jclRegDate.getDate()));
+//        ListStu();
+            
+
+            if( flag != false){
+                txtLastName.setText("");
+                txtStName.setText("");
+                btnGroupGender.clearSelection();
+                jclDOB.setDate(null);
+                jclRegDate.setDate(null);
+                taiDanhsach();
+                this.dispose();
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JdlCreateStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCreateNewStuActionPerformed
 
     private void btnClearWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearWordsActionPerformed
@@ -193,14 +274,18 @@ public class JdlCreateStudent extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JdlCreateStudent dialog = new JdlCreateStudent(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                try {
+                    JdlCreateStudent dialog = new JdlCreateStudent(new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(JdlCreateStudent.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

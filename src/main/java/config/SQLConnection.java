@@ -20,7 +20,7 @@ import static javax.swing.JRootPane.ERROR_DIALOG;
  *
  * @author Admin
  */
-public final class SQLConnection {
+public class SQLConnection {
 
 
     String host;
@@ -32,7 +32,7 @@ public final class SQLConnection {
     public static ResultSet rs = null;
 
     public SQLConnection() throws ClassNotFoundException {
-        connectionTest();
+        connectData();
     }
 
     public SQLConnection(String host, String username, String password, String database) {
@@ -42,7 +42,7 @@ public final class SQLConnection {
         this.database = database;
     }
 
-    protected void connectionTest() throws ClassNotFoundException {
+    protected void connectData() throws ClassNotFoundException {
         docFileText();
 
         url = "jdbc:mysql://" + host + "/" + database + "?useUnicode=true&characterEncoding=UTF8";
@@ -53,7 +53,7 @@ public final class SQLConnection {
 //            System.out.println("Success");
 //            System.out.println(conn.getCatalog());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Fail to connect database!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Fail to connect database!", "Warning", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
             closeConnection();
         }
@@ -114,10 +114,11 @@ public final class SQLConnection {
             return rs;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Database connection failed!", "Error", JOptionPane.INFORMATION_MESSAGE);
-            //System.exit(0);
+//            JOptionPane.showMessageDialog(null, "Database connection failed!", "Error", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+            closeConnection();
         }
-        closeConnection();
+        
         return null;
 
     }
