@@ -33,17 +33,17 @@ public class StudentDAO {
         ArrayList<Student_DTO> dshv = new ArrayList<>();
         x = new SQLConnection();
         try{
-            String sql = "SELECT * FROM student";
+            String sql = "SELECT * FROM person Where HireDate IS NULL";
             x.sqlExcute(sql);
             
             while(rs.next()){
                 Student_DTO hv = new Student_DTO();
                 hv.setStuID(rs.getString(1));
                 hv.setLastName(rs.getString(2));
-                hv.setStName(rs.getString(3));
-                hv.setDob(rs.getString(4));
-                hv.setGender(rs.getString(5));
-                hv.setRegDate(rs.getString(6));  
+                hv.setFirstName(rs.getString(3));
+//                hv.setDob(rs.getString(4));
+//                hv.setGender(rs.getString(5));
+                hv.setRegDate(rs.getString(5));  
                 dshv.add(hv);
             }
             return dshv;
@@ -54,18 +54,19 @@ public class StudentDAO {
         
     }
     
-    public boolean addStu(Student_DTO stu){
+    public boolean addStu(Student_DTO stu) throws ClassNotFoundException{
         boolean result = false;
         try{
-            String sql = "INSERT INTO student VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO person(Lastname, Firstname, EnrollmentDate) VALUES(?,?,?)";
             PreparedStatement prep = conn.prepareStatement(sql);
-            prep.setString(1, stu.getStuID());
-            prep.setString(2, stu.getLastName());
-            prep.setString(3, stu.getStName());
-            prep.setString(4, stu.getDob());
-            prep.setString(5, stu.getGender());
-            prep.setString(6, stu.getRegDate());
+//            prep.setString(1, stu.getStuID());
+            prep.setString(1, stu.getLastName());
+            prep.setString(2, stu.getFirstName());
+//            prep.setString(4, stu.getDob());
+//            prep.setString(5, stu.getGender());
+            prep.setString(3, stu.getRegDate());
             result = prep.executeUpdate() > 0;
+            StuList();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -73,31 +74,33 @@ public class StudentDAO {
         return result;
     }
     
-    public boolean updateStu(Student_DTO stu){
+    public boolean updateStu(Student_DTO stu) throws ClassNotFoundException{
         boolean result = false;
         try {
-            String sql = "UPDATE student SET LastName=?, FirstName=?, DOB=? Gender=? RegisterDay=? WHERE StudentID=?";
+            String sql = "UPDATE person SET Lastname=?, Firstname=?, EnrollmentDate=? WHERE PersonID=?";
             PreparedStatement prep = conn.prepareStatement(sql);
             prep.setString(1, stu.getLastName());
-            prep.setString(2, stu.getStName());
-            prep.setString(3, stu.getDob());
-            prep.setString(4, stu.getGender());
-            prep.setString(5, stu.getRegDate());
-            prep.setString(6, stu.getStuID());
+            prep.setString(2, stu.getFirstName());
+//            prep.setString(3, stu.getDob());
+//            prep.setString(4, stu.getGender());
+            prep.setString(3, stu.getRegDate());
+            prep.setString(4, stu.getStuID());
             result = prep.executeUpdate() > 0;
+            StuList();
         } catch (SQLException ex) {
             return false;
         }
         return result;
     }
     
-    public boolean deleteStu(String stuID){
+    public boolean deleteStu(String stuID) throws ClassNotFoundException{
         boolean result = false;
         try{
-            String sql = "DELETE FROM student where StudentID=?";
+            String sql = "DELETE FROM person where PersonID=?";
             PreparedStatement prep = conn.prepareStatement(sql);
             prep.setString(1, stuID);
             result = prep.executeUpdate() > 0;
+            StuList();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,7 +108,7 @@ public class StudentDAO {
     }
     
     public String lastIdOrder() throws SQLException {
-        String sql = "SELECT * FROM student ORDER BY StudentID DESC LIMIT 1";
+        String sql = "SELECT * FROM person ORDER BY PersonID DESC LIMIT 1";
         rs = null;
         try {
             st = conn.createStatement();

@@ -48,9 +48,9 @@ public class QLyHocVien extends javax.swing.JPanel {
                 Vector vec = new Vector();
                 vec.add(hv.getStuID());
                 vec.add(hv.getLastName());
-                vec.add(hv.getStName());
-                vec.add(hv.getDob());
-                vec.add(hv.getGender());
+                vec.add(hv.getFirstName());
+//                vec.add(hv.getDob());
+//                vec.add(hv.getGender());
                 vec.add(hv.getRegDate());
                 dtmStu.addRow(vec);
             }
@@ -63,9 +63,9 @@ public class QLyHocVien extends javax.swing.JPanel {
         dtmStu = new DefaultTableModel();
         dtmStu.addColumn("Student ID");
         dtmStu.addColumn("LastName");
-        dtmStu.addColumn("Name");
-        dtmStu.addColumn("DOB");
-        dtmStu.addColumn("Gender");
+        dtmStu.addColumn("FirstName");
+//        dtmStu.addColumn("DOB");
+//        dtmStu.addColumn("Gender");
         dtmStu.addColumn("Register Date");
         
         tblStudent.setModel(dtmStu);
@@ -73,8 +73,8 @@ public class QLyHocVien extends javax.swing.JPanel {
         tblStudent.getColumnModel().getColumn(0).setModelIndex((int) CENTER_ALIGNMENT);
         tblStudent.getColumnModel().getColumn(1).setPreferredWidth(120);
         tblStudent.getColumnModel().getColumn(2).setPreferredWidth(55);
-        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(70);
-        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(50);
+//        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(70);
+//        tblStudent.getColumnModel().getColumn(3).setPreferredWidth(50);
         tblStudent.getColumnModel().getColumn(3).setPreferredWidth(110);
         
         loadStuList();
@@ -196,6 +196,7 @@ public class QLyHocVien extends javax.swing.JPanel {
         // TODO add your handling code here:
          try {
             JdlCreateStudent a = new JdlCreateStudent(null, true);
+            loadStuList();
             a.setModal(true);
             a.setVisible(true);
         } catch (Exception e) {

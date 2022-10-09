@@ -14,20 +14,18 @@ public class Student_DTO {
     
     private String stuID;
     private String lastName;
-    private String stName;
-    private String gender;
-    private String dob;
+    private String firstName;
     private String regDate;
 
     public Student_DTO() {
     }
 
-    public Student_DTO(String stuID, String lastName, String stName, String gender, String dob, String regDate) {
-        this.stuID = stuID;
+    public Student_DTO(String lastName, String firstName, String gender, String dob, String regDate) {
+//        this.stuID = stuID;
         this.lastName = lastName;
-        this.stName = stName;
-        this.gender = gender;
-        this.dob = dob;
+        this.firstName = firstName;
+//        this.gender = gender;
+//        this.dob = dob;
         this.regDate = regDate;
     }
 
@@ -47,29 +45,29 @@ public class Student_DTO {
         this.lastName = lastName;
     }
 
-    public String getStName() {
-        return stName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setStName(String stName) {
-        this.stName = stName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
+//    public String getGender() {
+//        return gender;
+//    }
+//
+//    public void setGender(String gender) {
+//        this.gender = gender;
+//    }
+//
+//    public String getDob() {
+//        return dob;
+//    }
+//
+//    public void setDob(String dob) {
+//        this.dob = dob;
+//    }
 
     public String getRegDate() {
         return regDate;

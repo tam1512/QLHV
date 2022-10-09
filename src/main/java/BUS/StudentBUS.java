@@ -7,6 +7,7 @@
 package BUS;
 import DTO.Student_DTO;
 import DAO.StudentDAO;
+import GUI.QLyHocVien;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class StudentBUS {
     
-    private StudentDAO stuDAO = new StudentDAO();
+    private final StudentDAO stuDAO = new StudentDAO();
     private ArrayList<Student_DTO> stuList = null;
    
 
@@ -41,29 +42,29 @@ public class StudentBUS {
         
     }
     
-    public boolean addStudent( String lastName, String stName, String dob, String gender, String regDate){
+    public boolean addStudent( String lastName, String firstName, String regDate){
         boolean flag = false;
         try {
             if(lastName.trim().equals("")){
                 JOptionPane.showMessageDialog(null, "Chưa nhập họ học viên", "CẢNH BÁO", JOptionPane.ERROR_MESSAGE);
                 
             }
-            if(stName.trim().equals("")){
+            if(firstName.trim().equals("")){
                 JOptionPane.showMessageDialog(null, "Chưa nhập tên học viên", "CẢNH BÁO", JOptionPane.ERROR_MESSAGE);
                 
             }
-            if(gender.trim().equals("") | dob.equals("") | regDate.equals("")){
+            if(regDate.equals("")){
                 JOptionPane.showMessageDialog(null, "Vẫn còn các trường chưa nhập thông tin", "CẢNH BÁO", JOptionPane.ERROR_MESSAGE);
             }
-            if(!lastName.trim().equals("") && !stName.trim().equals("") && !gender.trim().equals("") && !dob.equals("") && !regDate.equals("") ){
+            if(!lastName.trim().equals("") && !firstName.trim().equals("") && !regDate.equals("") ){
                 
             
                 Student_DTO hv = new Student_DTO();
                 hv.setStuID(createAutoId());
                 hv.setLastName(lastName);
-                hv.setStName(stName);
-                hv.setDob(dob);
-                hv.setGender(gender);
+                hv.setFirstName(firstName);
+//                hv.setDob(dob);
+//                hv.setGender(gender);
                 hv.setRegDate(regDate);
 
                 flag = stuDAO.addStu(hv);

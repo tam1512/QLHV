@@ -232,7 +232,6 @@ public class Main_GUI extends javax.swing.JFrame {
         nevPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblClose.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\QLySV\\src\\main\\java\\image\\outline_cancel_black_24dp.png")); // NOI18N
         lblClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCloseMouseClicked(evt);
@@ -241,7 +240,6 @@ public class Main_GUI extends javax.swing.JFrame {
         nevPane.add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 2, -1, -1));
 
         lblMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMinimize.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\QLySV\\src\\main\\java\\image\\outline_do_not_disturb_on_black_24dp.png")); // NOI18N
         lblMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblMinimizeMouseClicked(evt);

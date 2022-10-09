@@ -49,9 +49,9 @@ public class JdlCreateStudent extends javax.swing.JDialog {
         dtmStu = new DefaultTableModel();
         dtmStu.addColumn("Student ID");
         dtmStu.addColumn("LastName");
-        dtmStu.addColumn("Name");
-        dtmStu.addColumn("DOB");
-        dtmStu.addColumn("Gender");
+        dtmStu.addColumn("FirstName");
+//        dtmStu.addColumn("DOB");
+//        dtmStu.addColumn("Gender");
         dtmStu.addColumn("Register Date");
         
         a.tblStudent.setModel(dtmStu);
@@ -66,9 +66,9 @@ public class JdlCreateStudent extends javax.swing.JDialog {
                 Vector vec = new Vector();
                 vec.add(hv.getStuID());
                 vec.add(hv.getLastName());
-                vec.add(hv.getStName());
-                vec.add(hv.getDob());
-                vec.add(hv.getGender());
+                vec.add(hv.getFirstName());
+//                vec.add(hv.getDob());
+//                vec.add(hv.getGender());
                 vec.add(hv.getRegDate());
                 dtmStu.addRow(vec);
             }
@@ -208,15 +208,16 @@ public class JdlCreateStudent extends javax.swing.JDialog {
                 gt = "Male";
             }
             
-            boolean flag = stuBUS.addStudent(txtLastName.getText(), txtStName.getText(),sdf.format(jclDOB.getDate()), gt, sdf.format(jclRegDate.getDate()));
+            boolean flag = stuBUS.addStudent(txtLastName.getText(), txtStName.getText(), sdf.format(jclRegDate.getDate()));
 //        ListStu();
+//loadStuList();
             
 
             if( flag != false){
                 txtLastName.setText("");
                 txtStName.setText("");
-                btnGroupGender.clearSelection();
-                jclDOB.setDate(null);
+//                btnGroupGender.clearSelection();
+//                jclDOB.setDate(null);
                 jclRegDate.setDate(null);
                 taiDanhsach();
                 this.dispose();
@@ -230,11 +231,11 @@ public class JdlCreateStudent extends javax.swing.JDialog {
         // TODO làm sạc các trường thông tin
         txtLastName.setText(null);
         txtStName.setText(null);
-        jclDOB.setDateFormatString(null);
-        jclDOB.setDate(null);
+//        jclDOB.setDateFormatString(null);
+//        jclDOB.setDate(null);
         jclRegDate.setDateFormatString(null);
         jclRegDate.setDate(null);
-        btnGroupGender.clearSelection();
+//        btnGroupGender.clearSelection();
     }//GEN-LAST:event_btnClearWordsActionPerformed
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
