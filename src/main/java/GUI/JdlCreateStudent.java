@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,14 +29,15 @@ public class JdlCreateStudent extends javax.swing.JDialog {
     private StudentBUS stuBUS = new StudentBUS();
     private Student_DTO stuDTO = null;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    QLyHocVien a = new QLyHocVien();
+    QLyHocVien a  = null;
     DefaultTableModel dtmStu;
     
     
-    public JdlCreateStudent(java.awt.Frame parent, boolean modal) throws ClassNotFoundException {
+    public JdlCreateStudent(java.awt.Frame parent, boolean modal,  QLyHocVien QLHV) throws ClassNotFoundException {
         super(parent, modal);
         initComponents();
 //        ListStu();
+       a =QLHV;
         taiDanhsach();
         
     }
@@ -208,12 +210,22 @@ public class JdlCreateStudent extends javax.swing.JDialog {
                 gt = "Male";
             }
             
-            boolean flag = stuBUS.addStudent(txtLastName.getText(), txtStName.getText(), sdf.format(jclRegDate.getDate()));
+            int lastID = stuBUS.addStudent(txtLastName.getText(), txtStName.getText(), sdf.format(jclRegDate.getDate()));
 //        ListStu();
 //loadStuList();
             
 
-            if( flag != false){
+            if( lastID != -1){
+//                Vector vec = new Vector();
+//                vec.add(lastID);
+//                vec.add(txtLastName.getText());
+//                vec.add(txtStName.getText());
+//                vec.add(sdf.format(jclRegDate.getDate()));
+//                dtmStu.addRow(vec);
+                a.loadStuList();
+//                taiDanhsach();
+//                System.out.println(vec);
+                System.out.println(lastID);
                 txtLastName.setText("");
                 txtStName.setText("");
 //                btnGroupGender.clearSelection();
@@ -275,18 +287,19 @@ public class JdlCreateStudent extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                JdlCreateStudent dialog = null;
                 try {
-                    JdlCreateStudent dialog = new JdlCreateStudent(new javax.swing.JFrame(), true);
-                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                        @Override
-                        public void windowClosing(java.awt.event.WindowEvent e) {
-                            System.exit(0);
-                        }
-                    });
-                    dialog.setVisible(true);
+                    dialog = new JdlCreateStudent(new javax.swing.JFrame(), true, new QLyHocVien());
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(JdlCreateStudent.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

@@ -4,6 +4,7 @@
  */
 package Main;
 
+import DAO.StudentDAO;
 import GUI.Main_GUI;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -15,10 +16,13 @@ import java.util.logging.Logger;
  */
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+       
         changLNF("Windows");
         Main_GUI a = new Main_GUI();
         a.setVisible(true);
         a.setLocationRelativeTo(null);
+        StudentDAO stuDAO = new StudentDAO();
+        System.out.println(stuDAO.getLastID());
     }
     public static void changLNF(String nameLNF) {
         try {

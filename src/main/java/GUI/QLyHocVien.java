@@ -195,13 +195,14 @@ public class QLyHocVien extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
          try {
-            JdlCreateStudent a = new JdlCreateStudent(null, true);
+            JdlCreateStudent a = new JdlCreateStudent(null, true, this);
             loadStuList();
             a.setModal(true);
             a.setVisible(true);
         } catch (Exception e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -212,7 +213,11 @@ public class QLyHocVien extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tblStudent.getSelectedRow();
         if (row > -1) {
-            boolean flag = stuBUS.deleteStudent(dtmStu.getValueAt(row, 0).toString());
+            try {
+                boolean flag = stuBUS.deleteStudent(dtmStu.getValueAt(row, 0).toString());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(QLyHocVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
             customStu();
            
             

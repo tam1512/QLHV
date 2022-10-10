@@ -54,6 +54,20 @@ public class StudentDAO {
         
     }
     
+    public int getLastID() {
+        int kq = 0;
+        try {
+            String sql = "SELECT MAX(PersonID) FROM person";
+            PreparedStatement prep = conn.prepareStatement(sql);
+            ResultSet result = prep.executeQuery();
+            while (result.next()) {
+                kq = result.getInt(1);
+            }  
+        } catch (Exception e) {
+        }
+        return kq;
+    }
+    
     public boolean addStu(Student_DTO stu) throws ClassNotFoundException{
         boolean result = false;
         try{
@@ -66,7 +80,8 @@ public class StudentDAO {
 //            prep.setString(5, stu.getGender());
             prep.setString(3, stu.getRegDate());
             result = prep.executeUpdate() > 0;
-            StuList();
+//            System.out.println(result);
+//            StuList();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -86,7 +101,7 @@ public class StudentDAO {
             prep.setString(3, stu.getRegDate());
             prep.setString(4, stu.getStuID());
             result = prep.executeUpdate() > 0;
-            StuList();
+//            StuList();
         } catch (SQLException ex) {
             return false;
         }
@@ -100,7 +115,7 @@ public class StudentDAO {
             PreparedStatement prep = conn.prepareStatement(sql);
             prep.setString(1, stuID);
             result = prep.executeUpdate() > 0;
-            StuList();
+//            StuList();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
